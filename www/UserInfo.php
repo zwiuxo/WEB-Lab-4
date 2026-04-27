@@ -2,9 +2,9 @@
 class UserInfo {
     public static function getInfo(): array {
         return [
-            'IP-адрес' => $_SERVER['REMOTE_ADDR'] ?? 'Не определен',
-            'Браузер' => $_SERVER['HTTP_USER_AGENT'] ?? 'Не определен',
-            'Дата и время' => date('Y-m-d H:i:s')
+            'ip' => $_SERVER['REMOTE_ADDR'] ?? '127.0.0.1',
+            'browser' => $_SERVER['HTTP_USER_AGENT'] ?? 'Unknown',
+            'time' => date('H:i:s')
         ];
     }
 }
