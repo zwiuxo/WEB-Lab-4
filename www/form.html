@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Заказ такси вариант 16</title>
+    <style>
+        @keyframes open { from { opacity: 0; } to { opacity: 1; } }
+        body { background-color: #1a1a1a; color: #f1f1f1; font-family: Arial, sans-serif; }
+        form { width: 400px; margin: 50px auto; padding: 20px; border: 3px solid #ffcc00; border-radius: 10px; background-color: #222; animation: open 1.2s; }
+        h2 { text-align: center; color: #ffcc00; }
+        input, select { margin: 10px 0; width: 100%; padding: 10px; border: 1px solid #444; background-color: #333; color: white; box-sizing: border-box; }
+        input[type="checkbox"], input[type="radio"] { width: auto; }
+        button { width: 100%; padding: 12px; margin-top: 15px; background-color: #ffcc00; color: black; border: none; font-weight: bold; cursor: pointer; transition: 0.3s; }
+        button:hover { background-color: #333; color: #ffcc00; border: 1px solid #ffcc00; }
+    </style>
+</head>
+<body>
+
+    <!-- Шаг 1: Добавили action и method -->
+    <form id="order" action="process.php" method="POST">
+        <h2>Taxi Order</h2>
+        
+        <input type="text" name="user_name" placeholder="Ваше имя" required>
+        <input type="number" name="pass_count" placeholder="Кол-во пассажиров" required>
+
+        <p>Тариф заказа:</p>
+        <select name="type">
+            <option value="Эконом">Эконом</option>
+            <option value="Комфорт">Комфорт</option>
+            <option value="Бизнес">Бизнес</option>
+        </select>
+
+        <p><input type="checkbox" name="bag"> Нужен багажник</p>
+
+        <p>Тип авто:</p>
+        <input type="radio" name="car" value="Седан" checked> Седан
+        <input type="radio" name="car" value="Минивэн"> Минивэн
+
+        <button type="submit">ЗАКАЗАТЬ</button>
+    </form>
+
+    <script>
+        document.getElementById("order").addEventListener("submit", function() {
+            const name = this.user_name.value;
+            alert("Заказ такси для: " + name);
+        });
+
+        let t;
+        function reset() {
+            clearTimeout(t);
+            t = setTimeout(function() {
+                alert("15 секунд без действия");
+            }, 15000);
+        }
+        window.onmousemove = reset;
+        window.onkeydown = reset;
+        reset();
+    </script>
+</body>
+</html>
