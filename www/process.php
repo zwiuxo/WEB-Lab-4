@@ -2,6 +2,22 @@
 session_start();
 require_once 'ApiClient.php';
 
+if (isset($_GET['ajax'])) {
+    $api = new ApiClient();
+    $url = 'https://bigdatacloud.net';
+    
+    $apiData = $api->request($url);
+
+    if (!isset($apiData['error'])) {
+        $_SESSION['api_data'] = $apiData;
+        file_put_contents('api_cache.json', json_encode($apiData, JSON_UNESCAPED_UNICODE));
+    }
+    
+    header('Content-Type: application/json');
+    echo json_encode($apiData);
+    exit();
+}
+
 $name = htmlspecialchars($_POST['user_name'] ?? '');
 
 if (empty($name)) {
@@ -11,8 +27,7 @@ if (empty($name)) {
 }
 
 $api = new ApiClient();
-
-$url = 'https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=55.75&longitude=37.61&localityLanguage=ru';
+$url = 'https://bigdatacloud.net';
 
 // штрафное задание
 $cacheFile = 'api_cache.json';
